@@ -9,6 +9,7 @@ services:
     #  マウント先 
     volumes:
       - ./app:/usr/src/app
+      #ホットリロードをonにする
       # - /usr/src/app/node_modules
     #  環境変数
     environment:
