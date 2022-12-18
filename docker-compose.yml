@@ -1,20 +1,23 @@
-version: '3'
+version: "3"
 services:
-# コンテナ名
+  # コンテナ名
   client:
     build:
-    #　ドッカーファイルの場所
+      # ドッカーファイルの場所
       context: .
       dockerfile: ./front/Dockerfile
-    #  マウント先 
+
+    # マウント先
     volumes:
       - ./app:/usr/src/app
-      #ホットリロードをonにする
-      # - /usr/src/app/node_modules
-    #  環境変数
+    # ホットリロードをonにする
+    # - /usr/src/app/node_modules
+
+    # 環境変数
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: sh -c "yarn && yarn dev"
-    #PC上のport:コンテナ内のport
+
+    # PC上のport:コンテナ内のport
     ports:
       - "3000:3000"
