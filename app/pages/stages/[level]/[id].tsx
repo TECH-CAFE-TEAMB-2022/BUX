@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import React from "react";
 
-const aaa = () => {
+const Main = () => {
+  const router = useRouter();
   return <>aaa</>;
 };
 
-export default aaa;
+export default Main;
