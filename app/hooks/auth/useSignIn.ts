@@ -7,8 +7,9 @@ export const useSignInWithGoogle = () => {
 
   return {
     ...mutation,
-    mutate: mutation.mutate({
-      provider: new GoogleAuthProvider(),
-    }),
+    mutate: () =>
+      mutation.mutate({
+        provider: new GoogleAuthProvider(),
+      }),
   } as const;
 };
