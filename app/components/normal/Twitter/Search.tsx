@@ -3,16 +3,16 @@ import React from "react";
 
 export const Search = () => {
   return (
-    <Grid.Container direction="column">
+    <Grid.Container direction="column" css={{position:"fixed"}}>
       <Grid>
-        <Textarea placeholder={"キーワード検索"} css={{ margin: "10px" }} minRows={1} />
+        <Textarea placeholder={"キーワード検索"} css={{ margin: "10px  0" }} minRows={1} />
       </Grid>
       <Grid>
-        <Card variant="flat">
-          <Card.Body>
+        <Card variant="flat" css={{mw:"175px"}}>
+          <Card.Body >
             <Text h6>いまどうしてる？</Text>
-            <Text h6>#Designer</Text>
-            <Text h6>#UI/UX</Text>
+            <Text h6 color="primary">#Designer</Text>
+            <Text h6 color="primary">#UI/UX</Text>
           </Card.Body>
         </Card>
       </Grid>

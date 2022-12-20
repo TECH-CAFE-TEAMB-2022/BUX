@@ -11,11 +11,11 @@ export const Twitter = () => {
       <Grid >
         <Nav />
       </Grid>
-      <Spacer x={2} />
+      <Spacer x={4} />
       <Grid>
         <Timeline />
       </Grid>
-      <Spacer x={2} />
+      <Spacer x={2.8} />
       <Grid >
         <Search />
       </Grid>
