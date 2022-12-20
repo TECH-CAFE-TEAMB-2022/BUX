@@ -4,11 +4,21 @@ import { Icon } from "../../commons/Icon";
 
 export const Timeline = () => {
   return (
-    <Grid.Container direction="column">
+    <Grid.Container direction="column" >
       <Grid>
-        <Card variant="bordered" css={{ mw: "400px" }}>
+        <Card variant="bordered">
           <Card.Body>
             <TweetForm />
+          </Card.Body>
+        </Card>
+        <Card variant="bordered">
+          <Card.Body>
+            <TweetList />
+          </Card.Body>
+        </Card>
+        <Card variant="bordered">
+          <Card.Body>
+            <TweetList />
           </Card.Body>
         </Card>
         <Card variant="bordered">
@@ -23,7 +33,7 @@ export const Timeline = () => {
 
 const TweetForm = () => {
   return (
-    <Grid.Container direction="column">
+    <Grid.Container direction="column" gap={2}>
       <Grid>
         <Text h3>ホーム</Text>
       </Grid>
@@ -33,24 +43,17 @@ const TweetForm = () => {
             <Avatar />
           </Grid>
           <Grid>
-            <Textarea placeholder="いまどうしてる？" />
+            <Textarea placeholder="いまどうしてる？" width="700px" />
           </Grid>
         </Grid.Container>
       </Grid>
       <Grid>
-        <Grid.Container>
+        <Grid.Container gap={0.5}>
+          <Spacer x={28.3}/>
           <Grid>
-            <Icon src="/icons/addimage.svg" width={20} height={20} alt="写真を追加する" />{" "}
+            <Icon src="/icons/addimage.svg" width={30} height={30} alt="写真を追加する" />
           </Grid>
-          <Grid>
-            <Icon src="/icons/addimage.svg" width={20} height={20} alt="写真を追加する" />{" "}
-          </Grid>{" "}
-          <Grid>
-            <Icon src="/icons/addimage.svg" width={20} height={20} alt="写真を追加する" />{" "}
-          </Grid>{" "}
-          <Grid>
-            <Icon src="/icons/addimage.svg" width={20} height={20} alt="写真を追加する" />{" "}
-          </Grid>
+          <Spacer />
           <Grid>
             <Button auto>つぶやく</Button>
           </Grid>
@@ -74,8 +77,8 @@ const Tweet = () => {
       <Grid>
         <User name={"No name"} description={"@UI/UX_designer・21時間"} />
       </Grid>
-      <Grid>
-        <Text >Hello</Text>
+      <Grid css={{ marginLeft: "65px" }}>
+        <Text>Hello</Text>
       </Grid>
     </Grid.Container>
   );
