@@ -1,9 +1,14 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
+import { Stages } from "../../../components/Stages";
 
 const Main = () => {
   const router = useRouter();
-  return <>aaa</>;
+  const { level, id } = router.query;
+
+  if (!level || !id) return null;
+  return <Stages level={String(level)} id={Number(id)} />;
 };
 
 export default Main;
