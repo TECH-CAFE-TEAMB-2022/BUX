@@ -16,13 +16,16 @@ const dummyUser: User = {
 export const Header = () => {
   const { mutate: signOut } = useSignOut();
   const router = useRouter();
+  const handleClickIcon = () => {
+    router.push(pagesPath.$url());
+  };
   const handleClickSignOut = () => {
     signOut();
     router.push(pagesPath.$url());
   };
   return (
     <Navbar>
-      <Navbar.Brand>
+      <Navbar.Brand onClick={handleClickIcon} css={{ cursor: "pointer" }}>
         <Text b color="inherit" hideIn="xs" css={{ fontSize: "$2xl" }}>
           BUX
         </Text>
