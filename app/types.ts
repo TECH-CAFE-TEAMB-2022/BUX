@@ -4,3 +4,11 @@ export type User = {
   uid: string;
   imagePath: string;
 };
+
+
+export type Game = {
+    handleClickAnswer:(value:number)=>void
+    currentLife:number
+    currentAnswer:number
+    questionNum:number
+}
