@@ -2,9 +2,9 @@ import { Button, Spacer } from "@nextui-org/react";
 import React from "react";
 import { GoogleIcon } from "../icons/GoogleIcon";
 
-interface Props {
+type Props = {
   onClick: () => void;
-}
+};
 
 const LoginButton = ({ onClick }: Props): JSX.Element => {
   return (
