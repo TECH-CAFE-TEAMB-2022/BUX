@@ -1,22 +1,24 @@
 import { Grid, Spacer } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 import { Nav } from "./Nav";
 import { Timeline } from "./Timeline";
 import { Search } from "./Search";
 import { GameNav } from "../../commons/GameNav";
+import { Game } from "../../../types";
 
-export const Twitter = () => {
+export const Twitter = ({currentLife,currentAnswer,handleClickAnswer,questionNum}:Game) => {
+
   return (
     <>
-      <GameNav />
+      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer}/>
       <Grid.Container>
         <Spacer x={3} />
         <Grid>
-          <Nav />
+          <Nav handleClickAnswer={handleClickAnswer}/>
         </Grid>
         <Spacer x={4} />
         <Grid>
-          <Timeline />
+          <Timeline handleClickAnswer={handleClickAnswer}/>
         </Grid>
         <Spacer x={2.8} />
         <Grid>
