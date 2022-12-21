@@ -29,6 +29,13 @@ const TopNav: NextPage = () => {
     setActive(level ? level : "");
   }, [router]);
 
+  // クライアントが読み込まれたときに実行
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
+
   return (
     <Navbar isBordered variant="floating">
       <Spacer />
@@ -39,16 +46,16 @@ const TopNav: NextPage = () => {
         gap="$15"
         enableCursorHighlight
       >
-        <Navbar.Link onPress={handleClickAll} isActive={active == "all"}>
+        <Navbar.Link onClick={handleClickAll} isActive={active == "all"}>
           ALL
         </Navbar.Link>
-        <Navbar.Link onPress={handleClickEasy} isActive={active == "easy"}>
+        <Navbar.Link onClick={handleClickEasy} isActive={active == "easy"}>
           EASY
         </Navbar.Link>
-        <Navbar.Link onPress={handleClickNormal} isActive={active == "normal"}>
+        <Navbar.Link onClick={handleClickNormal} isActive={active == "normal"}>
           NORMAL
         </Navbar.Link>
-        <Navbar.Link onPress={handleClickHard} isActive={active == "hard"}>
+        <Navbar.Link onClick={handleClickHard} isActive={active == "hard"}>
           HARD
         </Navbar.Link>
       </Navbar.Content>
