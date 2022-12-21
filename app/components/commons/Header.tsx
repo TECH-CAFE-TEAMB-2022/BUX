@@ -1,19 +1,13 @@
 import { Avatar, Dropdown, Navbar, Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuth } from "../../hooks/auth/useAuth";
 import { useSignOut } from "../../hooks/auth/useSignOut";
 import { pagesPath } from "../../lib/$path";
 import { User } from "../../types";
-import { Box } from "./Box";
-
-const dummyUser: User = {
-  email: "zoey@example.com",
-  name: "jon",
-  imagePath: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-  uid: "",
-};
 
 export const Header = () => {
+  const { user, isLoading } = useAuth();
   const { mutate: signOut } = useSignOut();
   const router = useRouter();
   const handleClickIcon = () => {
@@ -23,6 +17,10 @@ export const Header = () => {
     signOut();
     router.push(pagesPath.$url());
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <Navbar>
       <Navbar.Brand onClick={handleClickIcon} css={{ cursor: "pointer" }}>
@@ -30,9 +28,8 @@ export const Header = () => {
           BUX
         </Text>
       </Navbar.Brand>
-
       <Navbar.Content>
-        <IconDropDown user={dummyUser} signOut={handleClickSignOut} />
+        {user && <IconDropDown user={user} signOut={handleClickSignOut} />}
       </Navbar.Content>
     </Navbar>
   );
@@ -61,7 +58,7 @@ const IconDropDown = ({ user, signOut }: DropdownProps) => {
       >
         <Dropdown.Item key="profile" css={{ height: "$18" }}>
           <Text b color="inherit" css={{ d: "flex" }}>
-            Signed in as
+            {user.name}
           </Text>
           <Text b color="inherit" css={{ d: "flex" }}>
             {user.email}
