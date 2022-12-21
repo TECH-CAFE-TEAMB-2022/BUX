@@ -46,7 +46,7 @@ export const Timeline = ({handleClickAnswer}:Timeline) => {
   );
 };
 
-const TweetForm = ({ setTweetInfo }: TweetForm) => {
+const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
   const [error, setError] = useState("");
   const [text, setText] = useState("いまどうしてる？");
 
@@ -54,9 +54,14 @@ const TweetForm = ({ setTweetInfo }: TweetForm) => {
     if (text) {
       setTweetInfo((before) => [...before, { text: text, time: "今" }]);
       setError("");
-      setText("");
+      setText("いまどうしてる？");
     } else {
       setError("入力してください");
+    }
+  }
+  const handleClickTextarea=(text:string)=>{
+    if(!text.includes("いまどうしてる？")){
+      handleClickAnswer(4)
     }
   }
   
@@ -77,6 +82,7 @@ const TweetForm = ({ setTweetInfo }: TweetForm) => {
               labelPlaceholder={error ? error : ""}
               status={error ? "error" : "default"}
               onChange={(e) => setText(e.currentTarget.value)}
+              onClick={()=>handleClickTextarea(text)}
             />
           </Grid>
         </Grid.Container>
@@ -121,6 +127,7 @@ const TweetList = ({ tweetInfo, handleClickAnswer}: TweetList) => {
 };
 
 const Tweet = ({ time, text,handleClickAnswer}: Tweet) => {
+
   return (
     <Grid.Container direction="column">
       <Grid onClick={()=>handleClickAnswer(3)}>

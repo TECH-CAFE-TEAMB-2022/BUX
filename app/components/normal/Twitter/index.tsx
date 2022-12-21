@@ -22,7 +22,7 @@ export const Twitter = ({currentLife,currentAnswer,handleClickAnswer,questionNum
         </Grid>
         <Spacer x={2.8} />
         <Grid>
-          <Search />
+          <Search handleClickAnswer={handleClickAnswer}/>
         </Grid>
       </Grid.Container>
     </>
