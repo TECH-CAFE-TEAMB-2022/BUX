@@ -1,4 +1,4 @@
-import { Card, Grid, Link, Text } from "@nextui-org/react";
+import { Button, Card, Grid, Link, Text } from "@nextui-org/react";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MoldQuestion, MoldQuestions, Questions } from "../types/question";
@@ -21,17 +21,19 @@ const SelectLevel = () => {
 
   const MockItem = ({ question }: { question: MoldQuestion }) => {
     return (
-      <Card css={{ h: "$24" }}>
-        <a
-          href={`/stages/${question.value.level}/${question.id}`}
-          style={{ display: "inline-block", width: "100%", height: "100%" }}
-        >
-          <Card.Body>
-            <Text h6 size={15} css={{ mt: 0, width: "100%" }}>
-              {question.value.name}
-            </Text>
-          </Card.Body>
-        </a>
+      <Card
+        css={{ h: "$24", textAlign: "center" }}
+        isPressable
+        isHoverable
+        onClick={() => {
+          router.push(`/stages/${question.value.level}/${question.id}`);
+        }}
+      >
+        <Card.Body css={{ h: "100%", justifyContent: "center" }}>
+          <Text h6 size={15} css={{ mt: 0, width: "100%", textAlign: "center", marginBottom: 0 }}>
+            {question.value.name}
+          </Text>
+        </Card.Body>
       </Card>
     );
   };
