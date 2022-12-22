@@ -1,4 +1,4 @@
-import { IconProps } from "../../types/Icon";
+import { IconProps } from "../../types/icon";
 
 export const GoogleIcon = ({ height = "24px", width = "24px", ...props }: IconProps) => {
   return (
