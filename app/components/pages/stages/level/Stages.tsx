@@ -1,9 +1,9 @@
 /**
  * コンポーネント表示の条件分岐
  */
-import React, { useState, useCallback, use, memo } from "react";
-import { Twitter } from "../components/normal/Twitter/index";
-import { Overlay } from "./commons/Overlay";
+import React, { useState} from "react";
+import { Twitter } from "../../../normal/Twitter/index";
+import { Overlay } from "../../../commons/Overlay";
 
 type Props = {
   level: string;
@@ -16,7 +16,7 @@ export const Stages = ({ level, id }: Props) => {
   const [currentAnswer, setCurrentAnswer] = useState(0);
   const [questionIDs, setQuestionIDs] = useState<number[]>([]);
 
-  const handleClickAnswer = (e:React.MouseEvent<unknown, MouseEvent>,questionID: number) => {
+  const handleClickAnswer = (e: React.MouseEvent<unknown, MouseEvent>, questionID: number) => {
     if (10 > currentLife && !questionIDs.includes(questionID)) {
       setCurrentLife(currentLife + 1);
     }
@@ -27,7 +27,7 @@ export const Stages = ({ level, id }: Props) => {
       setQuestionIDs((before) => [...before, questionID]);
       setCurrentAnswer(currentAnswer + 1);
     }
-    e.stopPropagation()
+    e.stopPropagation();
   };
 
   const handleClickMistake = () => {
