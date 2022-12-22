@@ -13,4 +13,5 @@ export type Game = {
   currentLife: number;
   currentAnswer: number;
   questionNum: number;
+  setShowAnswer:Dispatch<SetStateAction<boolean>>
 };

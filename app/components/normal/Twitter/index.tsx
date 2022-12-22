@@ -11,10 +11,11 @@ export const Twitter = ({
   currentAnswer,
   handleClickAnswer,
   questionNum,
+  setShowAnswer
 }: Game) => {
   return (
     <>
-      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} />
+      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} setShowAnswer={setShowAnswer}/>
         <Grid.Container>
           <Spacer x={3} />
           <Grid>

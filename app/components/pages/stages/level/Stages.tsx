@@ -20,31 +20,39 @@ export const Stages = ({ level, id }: Props) => {
   const [pageX, setPageX] = useState(0);
   const [pageY, setPageY] = useState(0);
   const [mistakeVisible, setMistakeVisible] = useState(false);
+  const [showAnswer,setShowAnswer] = useState(false)
 
   const handleClickAnswer = (e: React.MouseEvent<unknown, MouseEvent>, questionID: number) => {
-    if (10 > currentLife && !questionIDs.includes(questionID)) {
-      setCurrentLife(currentLife + 1);
+    if(!showAnswer){
+      if (10 > currentLife && !questionIDs.includes(questionID)) {
+        setCurrentLife(currentLife + 1);
+      }
+      // 問題数より正解数が少ないかつ、すでに答えていないとき
+      if (questionNum > currentAnswer && !questionIDs.includes(questionID)) {
+        //   console.log(questionID);
+        //   console.log(questionIDs);
+        setQuestionIDs((before) => [...before, questionID]);
+        setCurrentAnswer(currentAnswer + 1);
+      }
+      setMistakeVisible(false)
+      e.stopPropagation();
     }
-    // 問題数より正解数が少ないかつ、すでに答えていないとき
-    if (questionNum > currentAnswer && !questionIDs.includes(questionID)) {
-      //   console.log(questionID);
-      //   console.log(questionIDs);
-      setQuestionIDs((before) => [...before, questionID]);
-      setCurrentAnswer(currentAnswer + 1);
-    }
-    setMistakeVisible(false)
-    e.stopPropagation();
   };
 
   const handleClickContiner = (e: React.MouseEvent<unknown, MouseEvent>) => {
-    setPageX(e.pageX);
+    if(!showAnswer){
+      setPageX(e.pageX);
     setPageY(e.pageY);
     setMistakeVisible(true);
     setCurrentLife(currentLife - 1);
+    }
+    
   };
 
   const handleMouseDownMistake=()=>{
-    setMistakeVisible(false)
+    if(!showAnswer){
+      setMistakeVisible(false)
+    }
   }
   return (
     <>
@@ -59,6 +67,7 @@ export const Stages = ({ level, id }: Props) => {
           currentLife={currentLife}
           currentAnswer={currentAnswer}
           handleClickAnswer={handleClickAnswer}
+          setShowAnswer={setShowAnswer}
         />
       </Container>
 
