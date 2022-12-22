@@ -3,21 +3,20 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "re
 import { Icon } from "../../commons/Icon";
 
 type Timeline = {
-  handleClickAnswer:(props:number)=>void
-}
+  handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,props: number) => void;
+};
 type TweetList = Timeline & {
   tweetInfo: { text: string; time: string }[];
 };
-type TweetForm = Timeline &{
+type TweetForm = Timeline & {
   setTweetInfo: Dispatch<SetStateAction<{ text: string; time: string }[]>>;
 };
-type Tweet = Timeline &{
+type Tweet = Timeline & {
   time: string;
   text: string | null;
 };
 
-
-export const Timeline = ({handleClickAnswer}:Timeline) => {
+export const Timeline = ({ handleClickAnswer}: Timeline) => {
   const [tweetInfo, setTweetInfo] = useState([
     {
       text: "Hello",
@@ -35,22 +34,22 @@ export const Timeline = ({handleClickAnswer}:Timeline) => {
   return (
     <Grid.Container direction="column">
       <Grid>
-        <Card variant="bordered" css={{ borderRadius: "0px" }}>
+        <Card variant="bordered" css={{ borderRadius: "0px", position: "relative", zIndex: "$10" }}>
           <Card.Body>
-            <TweetForm setTweetInfo={setTweetInfo} handleClickAnswer={handleClickAnswer}/>
+            <TweetForm setTweetInfo={setTweetInfo} handleClickAnswer={handleClickAnswer} />
           </Card.Body>
         </Card>
-        <TweetList tweetInfo={tweetInfo} handleClickAnswer={handleClickAnswer}/>
+        <TweetList tweetInfo={tweetInfo} handleClickAnswer={handleClickAnswer} />
       </Grid>
     </Grid.Container>
   );
 };
 
-const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
+const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
   const [error, setError] = useState("");
   const [text, setText] = useState("いまどうしてる？");
 
-  const handleClickTweet=()=>{
+  const handleClickTweet = () => {
     if (text) {
       setTweetInfo((before) => [...before, { text: text, time: "今" }]);
       setError("");
@@ -58,13 +57,14 @@ const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
     } else {
       setError("入力してください");
     }
-  }
-  const handleClickTextarea=(text:string)=>{
-    if(!text.includes("いまどうしてる？")){
-      handleClickAnswer(4)
+  };
+  const handleClickTextarea = (e:React.MouseEvent<unknown, MouseEvent>,text: string) => {
+    if (!text.includes("いまどうしてる？")) {
+      handleClickAnswer(e,4);
     }
-  }
-  
+    e.stopPropagation()
+  };
+
   return (
     <Grid.Container direction="column" gap={2}>
       <Grid>
@@ -82,7 +82,7 @@ const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
               labelPlaceholder={error ? error : ""}
               status={error ? "error" : "default"}
               onChange={(e) => setText(e.currentTarget.value)}
-              onClick={()=>handleClickTextarea(text)}
+              onClick={(e) => handleClickTextarea(e,text)}
             />
           </Grid>
         </Grid.Container>
@@ -95,10 +95,7 @@ const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
           </Grid>
           <Spacer />
           <Grid>
-            <Button
-              auto
-              onPress={handleClickTweet}
-            >
+            <Button auto onPress={handleClickTweet}>
               つぶやく
             </Button>
           </Grid>
@@ -108,7 +105,7 @@ const TweetForm = ({ setTweetInfo,handleClickAnswer }: TweetForm) => {
   );
 };
 
-const TweetList = ({ tweetInfo, handleClickAnswer}: TweetList) => {
+const TweetList = ({ tweetInfo, handleClickAnswer }: TweetList) => {
   return (
     <Grid.Container direction="column">
       {tweetInfo.map((value: { text: string; time: string }, index: number) => {
@@ -116,7 +113,7 @@ const TweetList = ({ tweetInfo, handleClickAnswer}: TweetList) => {
           <Grid key={index}>
             <Card variant="bordered" css={{ borderRadius: "0px" }}>
               <Card.Body>
-                <Tweet time={value.time} text={value.text} handleClickAnswer={handleClickAnswer}/>
+                <Tweet time={value.time} text={value.text} handleClickAnswer={handleClickAnswer} />
               </Card.Body>
             </Card>
           </Grid>
@@ -126,11 +123,10 @@ const TweetList = ({ tweetInfo, handleClickAnswer}: TweetList) => {
   );
 };
 
-const Tweet = ({ time, text,handleClickAnswer}: Tweet) => {
-
+const Tweet = ({ time, text, handleClickAnswer }: Tweet) => {
   return (
     <Grid.Container direction="column">
-      <Grid onClick={()=>handleClickAnswer(3)}>
+      <Grid onClick={(e) => handleClickAnswer(e,3)}>
         <User name={"No name"} description={`@UI/UX_designer・${time}`} />
       </Grid>
       <Grid css={{ marginLeft: "65px" }}>

@@ -5,10 +5,10 @@ export type User = {
   imagePath: string;
 };
 
-
 export type Game = {
-    handleClickAnswer:(value:number)=>void
-    currentLife:number
-    currentAnswer:number
-    questionNum:number
-}
+  handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,value: number) => void;
+  handleClickMistake: () => void;
+  currentLife: number;
+  currentAnswer: number;
+  questionNum: number;
+};

@@ -22,7 +22,7 @@ export const GameNav = ({ currentLife,questionNum,currentAnswer }:GameNav) => {
       <Button
         auto
         flat
-        css={{ position: "fixed", bottom: "$5", left: "$5", background: "#000" }}
+        css={{ position: "fixed", bottom: "$5", left: "$5", background: "#000",zIndex:"$5"}}
         icon={<Icon width={30} height={30} alt="戻る" src="/icons/cancel.svg" />}
         onPress={handleClickPageBack}
       />
@@ -56,6 +56,7 @@ export const GameNav = ({ currentLife,questionNum,currentAnswer }:GameNav) => {
           right: "10px",
           borderColor: "$accents1",
           borderRadius: "50px",
+          zIndex:"$max"
         }}
         color={"default"}
         auto
