@@ -1,9 +1,20 @@
-import { Avatar, Button, Card, Grid, Spacer, Text, Textarea, User } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Container,
+  Grid,
+  Popover,
+  Spacer,
+  Text,
+  Textarea,
+  User,
+} from "@nextui-org/react";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Icon } from "../../commons/Icon";
 
 type Timeline = {
-  handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,props: number) => void;
+  handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
 };
 type TweetList = Timeline & {
   tweetInfo: { text: string; time: string }[];
@@ -16,7 +27,7 @@ type Tweet = Timeline & {
   text: string | null;
 };
 
-export const Timeline = ({ handleClickAnswer}: Timeline) => {
+export const Timeline = ({ handleClickAnswer }: Timeline) => {
   const [tweetInfo, setTweetInfo] = useState([
     {
       text: "Hello",
@@ -48,6 +59,7 @@ export const Timeline = ({ handleClickAnswer}: Timeline) => {
 const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
   const [error, setError] = useState("");
   const [text, setText] = useState("いまどうしてる？");
+  const [answerFlg, setAnswerFlg] = useState(false);
 
   const handleClickTweet = () => {
     if (text) {
@@ -58,11 +70,12 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
       setError("入力してください");
     }
   };
-  const handleClickTextarea = (e:React.MouseEvent<unknown, MouseEvent>,text: string) => {
+  const handleClickTextarea = (e: React.MouseEvent<unknown, MouseEvent>, text: string) => {
     if (!text.includes("いまどうしてる？")) {
-      handleClickAnswer(e,4);
+      handleClickAnswer(e, 4);
+      setAnswerFlg(true);
     }
-    e.stopPropagation()
+    e.stopPropagation();
   };
 
   return (
@@ -76,14 +89,23 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
             <Avatar />
           </Grid>
           <Grid>
-            <Textarea
-              value={text}
-              width="700px"
-              labelPlaceholder={error ? error : ""}
-              status={error ? "error" : "default"}
-              onChange={(e) => setText(e.currentTarget.value)}
-              onClick={(e) => handleClickTextarea(e,text)}
-            />
+            <Popover placement="top" isDismissable={false}>
+              <Popover.Trigger >
+                <Textarea
+                  value={text}
+                  width="700px"
+                  labelPlaceholder={error ? error : ""}
+                  status={error ? "error" : "default"}
+                  onChange={(e) => setText(e.currentTarget.value)}
+                  onClick={(e) => handleClickTextarea(e, text)}
+                />
+              </Popover.Trigger>
+              {answerFlg && (
+                <Popover.Content>
+                  <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
+                </Popover.Content>
+              )}
+            </Popover>
           </Grid>
         </Grid.Container>
       </Grid>
@@ -126,8 +148,19 @@ const TweetList = ({ tweetInfo, handleClickAnswer }: TweetList) => {
 const Tweet = ({ time, text, handleClickAnswer }: Tweet) => {
   return (
     <Grid.Container direction="column">
-      <Grid onClick={(e) => handleClickAnswer(e,3)}>
-        <User name={"No name"} description={`@UI/UX_designer・${time}`} />
+      <Grid>
+        <Popover placement="right" isDismissable={false}>
+          <Popover.Trigger>
+            <User
+              name={"No name"}
+              description={`@UI/UX_designer・${time}`}
+              onClick={(e) => handleClickAnswer(e, 3)}
+            />
+          </Popover.Trigger>
+          <Popover.Content>
+            <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
+          </Popover.Content>
+        </Popover>
       </Grid>
       <Grid css={{ marginLeft: "65px" }}>
         <Text>{text}</Text>
