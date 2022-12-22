@@ -1,10 +1,9 @@
 export type User = {
-  name: string | undefined;
-  email: string | undefined;
+  name: string;
+  email: string;
   uid: string;
-  imagePath: string | undefined;
+  imagePath: string;
 };
-
 
 export type Game = {
   handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,value: number) => void;
