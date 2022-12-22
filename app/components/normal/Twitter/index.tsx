@@ -11,17 +11,10 @@ export const Twitter = ({
   currentAnswer,
   handleClickAnswer,
   questionNum,
-  handleClickMistake,
 }: Game) => {
   return (
     <>
       <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} />
-      <Container
-        onClick={(e) => {
-          handleClickMistake();
-          console.log(e.currentTarget);
-        }}
-      >
         <Grid.Container>
           <Spacer x={3} />
           <Grid>
@@ -36,7 +29,6 @@ export const Twitter = ({
             <Search handleClickAnswer={handleClickAnswer} />
           </Grid>
         </Grid.Container>
-      </Container>
     </>
   );
 };

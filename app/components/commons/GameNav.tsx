@@ -24,7 +24,7 @@ export const GameNav = ({ currentLife,questionNum,currentAnswer }:GameNav) => {
         flat
         css={{ position: "fixed", bottom: "$5", left: "$5", background: "#000",zIndex:"$5"}}
         icon={<Icon width={30} height={30} alt="戻る" src="/icons/cancel.svg" />}
-        onPress={handleClickPageBack}
+        onClick={handleClickPageBack}
       />
       <Button
         bordered

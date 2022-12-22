@@ -45,7 +45,7 @@ export const Timeline = ({ handleClickAnswer }: Timeline) => {
   return (
     <Grid.Container direction="column">
       <Grid>
-        <Card variant="bordered" css={{ borderRadius: "0px", position: "relative", zIndex: "$10" }}>
+        <Card variant="bordered" css={{ borderRadius: "0px", position: "relative"}}>
           <Card.Body>
             <TweetForm setTweetInfo={setTweetInfo} handleClickAnswer={handleClickAnswer} />
           </Card.Body>
@@ -117,7 +117,7 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
           </Grid>
           <Spacer />
           <Grid>
-            <Button auto onPress={handleClickTweet}>
+            <Button auto onClick={handleClickTweet}>
               つぶやく
             </Button>
           </Grid>
