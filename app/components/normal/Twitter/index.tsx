@@ -11,26 +11,32 @@ export const Twitter = ({
   currentAnswer,
   handleClickAnswer,
   questionNum,
-  setShowAnswer,
-  showAnswer
+  handleClickMistake,
 }: Game) => {
   return (
     <>
-      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} setShowAnswer={setShowAnswer} showAnswer={showAnswer}/>
+      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} />
+      <Container
+        onClick={(e) => {
+          handleClickMistake();
+          console.log(e.currentTarget);
+        }}
+      >
         <Grid.Container>
           <Spacer x={3} />
           <Grid>
-            <Nav handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
+            <Nav handleClickAnswer={handleClickAnswer} />
           </Grid>
           <Spacer x={4} />
           <Grid>
-            <Timeline handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
+            <Timeline handleClickAnswer={handleClickAnswer} />
           </Grid>
           <Spacer x={2.8} />
           <Grid>
-            <Search handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
+            <Search handleClickAnswer={handleClickAnswer} />
           </Grid>
         </Grid.Container>
+      </Container>
     </>
   );
 };

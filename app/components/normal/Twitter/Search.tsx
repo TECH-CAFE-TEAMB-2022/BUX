@@ -1,17 +1,15 @@
 import { Card, Grid, Spacer, Textarea, Text, Popover } from "@nextui-org/react";
 import React, { useState } from "react";
-import { AnswerPop } from "../../commons/AnswerPop";
 import { Icon } from "../../commons/Icon";
 
 type Search = {
   handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
-  showAnswer: boolean;
 };
-export const Search = ({ handleClickAnswer, showAnswer }: Search) => {
+export const Search = ({ handleClickAnswer }: Search) => {
   const handleClickTextarea = (e: React.MouseEvent<unknown, MouseEvent>, text: string) => {
     if (text.match(/\r\n|\r|\n/g)) {
       handleClickAnswer(e, 5);
-      setAnswerFlg(true);
+      setAnswerFlg(true)
     }
     e.stopPropagation();
   };
@@ -20,7 +18,7 @@ export const Search = ({ handleClickAnswer, showAnswer }: Search) => {
   return (
     <Grid.Container direction="column" css={{ position: "fixed" }}>
       <Grid>
-        <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true : undefined}>
+        <Popover placement="left" isDismissable={false}>
           <Popover.Trigger>
             <Textarea
               placeholder={"キーワード検索"}
@@ -29,7 +27,11 @@ export const Search = ({ handleClickAnswer, showAnswer }: Search) => {
               onClick={(e) => handleClickTextarea(e, e.currentTarget.value)}
             />
           </Popover.Trigger>
-          {(answerFlg || showAnswer) && <AnswerPop showAnswer={showAnswer} />}
+          {answerFlg && (
+            <Popover.Content>
+              <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
+            </Popover.Content>
+          )}
         </Popover>
       </Grid>
       <Grid>
