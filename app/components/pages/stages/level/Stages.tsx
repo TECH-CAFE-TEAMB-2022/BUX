@@ -7,13 +7,14 @@ import Image from "next/image";
 import { Button, Container, Grid, Popover, Tooltip } from "@nextui-org/react";
 import { Icon } from "../../../commons/Icon";
 import { Register } from "../../../easy/Register";
+import RainbowBackGround from "../../../easy/RainbowBackGround";
 
 
 type Props = {
   id: number;
 };
 export const Stages = ({ id }: Props) => {
-  const Name = Twitter;
+  const Name =  RainbowBackGround ;
   // const Name = Register;
   const questionNum = 5;
   const [currentLife, setCurrentLife] = useState(10);

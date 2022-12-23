@@ -1,6 +1,14 @@
 import { Button, Card, Container, Image, Link, Navbar, Row, Text } from "@nextui-org/react";
+import { Game } from "../../../types";
 
-const RainbowBackGround = () => {
+const RainbowBackGround = ({
+  currentLife,
+  currentAnswer,
+  handleClickAnswer,
+  questionNum,
+  setShowAnswer,
+  showAnswer,
+}:Game) => {
   return (
     <Container
       css={{
