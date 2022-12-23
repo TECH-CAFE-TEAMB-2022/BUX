@@ -8,22 +8,15 @@ const RainbowBackGround = ({
   questionNum,
   setShowAnswer,
   showAnswer,
-}:Game) => {
+}: Game) => {
   return (
     <Container
       css={{
-        // background:
-        //   "linear-gradient(to right,#c70000,#d28300,#dfd000,#00873c,#005aa0,#181878,#800073)",
-        // padding: "50px",
-        // h: "100%",
-        // minHeight: "100vh",
-        // minWidth: "100vw",
-        margin: 0,
         padding: 0,
       }}
       fluid
     >
-      <Card css={{ $$cardColor: "#fff", h: "100%", minHeight: "100vh", minWidth: "100vw" }}>
+      <Card css={{ $$cardColor: "#fff", h: "100%", minHeight: "100vh", minWidth: "100%" }}>
         <Card.Header>
           <Text h6 size={40} color="brack" css={{ m: 0 }}>
             マイ食べ歩き録
