@@ -1,7 +1,7 @@
 import { Grid, Input, useInput, Text, Button, Container, Popover } from "@nextui-org/react";
 import { useMemo } from "react";
 import { Game } from "../../../types";
-import { AnswerPop } from "../commons/AnswerPop";
+import { AnswerPop } from "../../commons/AnswerPop";
 import { Box } from "../../commons/Box";
 import { GameNav } from "../../commons/GameNav";
 
