@@ -2,6 +2,7 @@ import { Button, Card, Container, Modal, Spacer, Text } from "@nextui-org/react"
 import { useRouter } from "next/router";
 import { type } from "os";
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { pagesPath } from "../../lib/$path";
 import { Icon } from "./Icon";
 
 type GameNav = {
@@ -22,7 +23,7 @@ export const GameNav = ({
   const router = useRouter();
 
   const handleClickPageBack = () => {
-    router.back();
+    router.push(pagesPath.stages._level("all").$url());
   };
   const [visible, setVisible] = useState(false);
   const handlerClickModal = () => setVisible(true);
@@ -47,7 +48,13 @@ export const GameNav = ({
         />
         <Button
           bordered
-          css={{ position: "fixed", bottom: "20px", right: "100px", borderColor: "$accents1",zIndex:"$max"}}
+          css={{
+            position: "fixed",
+            bottom: "20px",
+            right: "100px",
+            borderColor: "$accents1",
+            zIndex: "$max",
+          }}
           color={"default"}
           auto
           disabled
@@ -58,7 +65,13 @@ export const GameNav = ({
         </Button>
         <Button
           bordered
-          css={{ position: "fixed", bottom: "20px", right: "10px", borderColor: "$accents1",zIndex:"$max"}}
+          css={{
+            position: "fixed",
+            bottom: "20px",
+            right: "10px",
+            borderColor: "$accents1",
+            zIndex: "$max",
+          }}
           color={"default"}
           auto
           disabled

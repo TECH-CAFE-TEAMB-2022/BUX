@@ -1,5 +1,5 @@
 import { Container, Grid, Spacer } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "./Nav";
 import { Timeline } from "./Timeline";
 import { Search } from "./Search";
@@ -15,6 +15,7 @@ export const Twitter = ({
   showAnswer,
 }: Game) => {
   const { user, isLoading } = useAuth();
+
   if (!user) return null;
   return (
     <>

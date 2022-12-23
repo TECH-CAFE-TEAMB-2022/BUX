@@ -1,6 +1,7 @@
 import { Avatar, Badge, Grid, Popover, Spacer } from "@nextui-org/react";
 import React, { useState } from "react";
-import { User } from "../../../BUX/app/types";
+import { User } from "../../../types";
+
 import { AnswerPop } from "../../commons/AnswerPop";
 import { Icon } from "../../commons/Icon";
 
