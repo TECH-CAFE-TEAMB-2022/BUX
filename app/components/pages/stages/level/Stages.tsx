@@ -11,16 +11,24 @@ import { Button, Container, Grid, Row } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { pagesPath } from "../../../../lib/$path";
 import { LEVEL } from "../../../../constants/leval";
+import { GameOverModal } from "./_GameOverModal";
+import { GameClearModal } from "./_GemaClearModal";
 
 type Props = {
   id: number;
 };
 export const Stages = ({ id }: Props) => {
   const { Component: Name, questionNum, level } = useConvertStage(id);
+
   const {
     isOpen: isOpenGameOverModal,
     close: closeGameOverModal,
     open: openGameOverModal,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenGameClearModal,
+    close: closeGameClearModal,
+    open: openGameClearModal,
   } = useDisclosure();
 
   const router = useRouter();
@@ -67,16 +75,32 @@ export const Stages = ({ id }: Props) => {
     router.reload();
   };
 
+  const handleClickNext = () => {
+    closeGameClearModal();
+    router.push(
+      pagesPath.stages
+        ._level(level)
+        ._id(id + 1)
+        .$url(),
+    );
+  };
+
   useEffect(() => {
     if (currentLife > 0) return;
     openGameOverModal();
   }, [currentLife]);
+
+  useEffect(() => {
+    if (currentAnswer < questionNum) return;
+    openGameClearModal();
+  }, [currentAnswer]);
 
   const handleMouseDownMistake = () => {
     if (!showAnswer) {
       setMistakeVisible(false);
     }
   };
+  if (!Name) return null;
   return (
     <>
       <Container
@@ -94,26 +118,18 @@ export const Stages = ({ id }: Props) => {
           showAnswer={showAnswer}
         />
       </Container>
-      <Modal
+
+      <GameClearModal
+        isOpen={isOpenGameClearModal}
+        onClickBack={handleClickBack}
+        onClickNext={handleClickNext}
+        onClose={closeGameClearModal}
+      />
+      <GameOverModal
         isOpen={isOpenGameOverModal}
+        onClickBack={handleClickBack}
+        onClickRetry={handleClickReTry}
         onClose={closeGameOverModal}
-        title={"GAME OVER"}
-        content={
-          <Grid.Container gap={2} justify="center">
-            <Grid sm={6}>
-              <Button auto bordered css={{ width: 100 }} onClick={handleClickBack}>
-                戻る
-              </Button>
-            </Grid>
-            <Grid sm={6}>
-              <Button auto onClick={handleClickReTry}>
-                {" "}
-                もう一度
-              </Button>
-            </Grid>
-          </Grid.Container>
-        }
-        preventClose
       />
       {mistakeVisible === true && showAnswer === false && (
         <Image

@@ -8,7 +8,7 @@ type Games = {
   [key: string]: (value: Game) => JSX.Element;
 };
 
-const games: Games = {
+const Games: Games = {
   twitter: Twitter,
   accountRegister: Register,
   gourmetBlog: RainbowBackGround,
@@ -18,6 +18,7 @@ const questions: Questions = require("../data/dummy.json");
 
 export const useConvertStage = (stageId: number) => {
   const question = questions[stageId];
-  const Component = games[question.name];
+  const Component = Games[question?.name];
+
   return { Component, ...question };
 };

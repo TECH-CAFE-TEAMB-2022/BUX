@@ -9,6 +9,7 @@ type Props = {
   width?: string;
   onClose: () => void;
   preventClose?: boolean;
+  headerFontSize?: string | number;
 };
 
 export const Modal = ({
@@ -19,6 +20,7 @@ export const Modal = ({
   width = "560px",
   onClose,
   preventClose,
+  headerFontSize = 18,
 }: Props): JSX.Element => {
   return (
     <NextModal
@@ -31,7 +33,7 @@ export const Modal = ({
       onClose={onClose}
     >
       <NextModal.Header>
-        <Text id="modal-title" size={18} css={{ fontWeight: "bold" }}>
+        <Text id="modal-title" size={headerFontSize} css={{ fontWeight: "bold" }}>
           {title}
         </Text>
       </NextModal.Header>
