@@ -1,21 +1,20 @@
 import { useAuthUser } from "@react-query-firebase/auth";
-import { User as UserRes } from "firebase/auth";
+import { onAuthStateChanged, User as UserRes } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../../plugins/firebaes/client";
 import { User } from "../../types";
 import { useDidUpdateEffect } from "../useDidUpdateEffect";
 
 export const useAuth = () => {
-  const { data: userRes, isLoading } = useAuthUser(["user"], auth);
-
+  const currentUser = auth.currentUser;
   const [user, setUser] = useState<User | undefined>();
 
   useDidUpdateEffect(() => {
-    if (!userRes) return;
-    setUser(convert(userRes));
-  }, [userRes]);
+    if (!currentUser) return;
+    setUser(convert(currentUser));
+  }, [currentUser]);
 
-  return { user, isLoading } as const;
+  return { user, isLoading: true } as const;
 };
 
 const convert = (res: UserRes): User => {
