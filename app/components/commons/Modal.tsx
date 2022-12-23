@@ -8,6 +8,7 @@ type Props = {
   buttons?: ReactNode;
   width?: string;
   onClose: () => void;
+  preventClose?: boolean;
 };
 
 export const Modal = ({
@@ -17,9 +18,11 @@ export const Modal = ({
   buttons,
   width = "560px",
   onClose,
+  preventClose,
 }: Props): JSX.Element => {
   return (
     <NextModal
+      preventClose={preventClose}
       scroll
       width={width}
       aria-labelledby="modal-title"
