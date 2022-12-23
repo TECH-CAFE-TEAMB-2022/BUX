@@ -6,13 +6,16 @@ import { Twitter } from "../../../normal/Twitter/index";
 import Image from "next/image";
 import { Button, Container, Grid, Popover, Tooltip } from "@nextui-org/react";
 import { Icon } from "../../../commons/Icon";
+import { Register } from "../../../easy/Register";
+
 
 type Props = {
   level: string;
   id: number;
 };
 export const Stages = ({ level, id }: Props) => {
-  const Name = Twitter;
+  // const Name = Twitter;
+  const Name = Register;
   const questionNum = 5;
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);

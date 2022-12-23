@@ -7,6 +7,12 @@ export type User = {
   imagePath: string | undefined;
 };
 
+export type Account = {
+  email: string;
+  name: string;
+  password: string;
+  passwordForConfirmation: string;
+};
 
 export type Game = {
   handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,value: number) => void;
