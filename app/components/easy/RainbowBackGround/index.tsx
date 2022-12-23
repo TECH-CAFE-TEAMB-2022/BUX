@@ -38,6 +38,7 @@ const RainbowBackGround = ({
         />
 
         <Card
+
           css={{
             $$cardColor: "#fff",
             h: "100%",
