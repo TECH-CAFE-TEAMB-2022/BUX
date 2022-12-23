@@ -9,9 +9,16 @@ type GameNav = {
   questionNum: number;
   currentAnswer: number;
   setShowAnswer: Dispatch<SetStateAction<boolean>>;
+  showAnswer: boolean;
 };
 
-export const GameNav = ({ currentLife, questionNum, currentAnswer, setShowAnswer }: GameNav) => {
+export const GameNav = ({
+  currentLife,
+  questionNum,
+  currentAnswer,
+  setShowAnswer,
+  showAnswer,
+}: GameNav) => {
   const router = useRouter();
 
   const handleClickPageBack = () => {
@@ -60,21 +67,23 @@ export const GameNav = ({ currentLife, questionNum, currentAnswer, setShowAnswer
             {currentAnswer} / {questionNum}
           </Text>
         </Button>
-        <Button
-          bordered
-          css={{
-            position: "fixed",
-            bottom: "70px",
-            right: "10px",
-            borderColor: "$accents1",
-            borderRadius: "50px",
-            zIndex: "$max",
-          }}
-          color={"default"}
-          auto
-          icon={<Icon width={30} height={30} alt="戻る" src="/icons/answer.svg" />}
-          onClick={handlerClickModal}
-        />
+        {showAnswer || (
+          <Button
+            bordered
+            css={{
+              position: "fixed",
+              bottom: "70px",
+              right: "10px",
+              borderColor: "$accents1",
+              borderRadius: "50px",
+              zIndex: "$max",
+            }}
+            color={"default"}
+            auto
+            icon={<Icon width={30} height={30} alt="答えを表示する" src="/icons/answer.svg" />}
+            onClick={handlerClickModal}
+          />
+        )}
       </Container>
 
       <Modal closeButton blur aria-labelledby="modal-title" open={visible} onClose={closeHandler}>

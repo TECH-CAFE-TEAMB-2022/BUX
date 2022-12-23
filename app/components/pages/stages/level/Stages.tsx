@@ -68,10 +68,11 @@ export const Stages = ({ level, id }: Props) => {
           currentAnswer={currentAnswer}
           handleClickAnswer={handleClickAnswer}
           setShowAnswer={setShowAnswer}
+          showAnswer={showAnswer}
         />
       </Container>
 
-      {mistakeVisible && (
+      {(mistakeVisible===true && showAnswer===false)&& (
         <Image
           src="/icons/mistake.svg"
           width={100}

@@ -11,23 +11,24 @@ export const Twitter = ({
   currentAnswer,
   handleClickAnswer,
   questionNum,
-  setShowAnswer
+  setShowAnswer,
+  showAnswer
 }: Game) => {
   return (
     <>
-      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} setShowAnswer={setShowAnswer}/>
+      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} setShowAnswer={setShowAnswer} showAnswer={showAnswer}/>
         <Grid.Container>
           <Spacer x={3} />
           <Grid>
-            <Nav handleClickAnswer={handleClickAnswer} />
+            <Nav handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
           <Spacer x={4} />
           <Grid>
-            <Timeline handleClickAnswer={handleClickAnswer} />
+            <Timeline handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
           <Spacer x={2.8} />
           <Grid>
-            <Search handleClickAnswer={handleClickAnswer} />
+            <Search handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
         </Grid.Container>
     </>
