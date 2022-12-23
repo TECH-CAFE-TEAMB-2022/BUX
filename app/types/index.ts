@@ -21,3 +21,8 @@ export type Game = {
   setShowAnswer:Dispatch<SetStateAction<boolean>>;
   showAnswer:boolean
 };
+
+export type NeedAnswer = {
+  handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
+  showAnswer: boolean;
+}

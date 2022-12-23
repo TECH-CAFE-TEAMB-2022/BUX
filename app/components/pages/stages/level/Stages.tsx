@@ -42,7 +42,9 @@ export const Stages = ({ id }: Props) => {
         setCurrentAnswer(currentAnswer + 1);
       }
       setMistakeVisible(false);
-      e.stopPropagation();
+      if(e.type !== "press"){        
+        e.stopPropagation();
+      }
     }
   };
 

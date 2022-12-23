@@ -31,7 +31,7 @@ const SelectLevel = () => {
       >
         <Card.Body css={{ h: "100%", justifyContent: "center" }}>
           <Text h6 size={15} css={{ mt: 0, width: "100%", textAlign: "center", marginBottom: 0 }}>
-            {question.value.name}
+            {question.value.displayName}
           </Text>
         </Card.Body>
       </Card>
