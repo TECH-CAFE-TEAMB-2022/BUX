@@ -1,22 +1,21 @@
 import { Avatar, Badge, Grid, Popover, Spacer } from "@nextui-org/react";
 import React, { useState } from "react";
-import { AnswerPop } from "../../commons/AnswerPop";
 import { Icon } from "../../commons/Icon";
 
 type Nav = {
   handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
-  showAnswer:boolean
 };
 
-export const Nav = ({ handleClickAnswer,showAnswer }: Nav) => {
+export const Nav = ({ handleClickAnswer }: Nav) => {
+  const [flg, setFlg] = useState(false);
   return (
     <Grid.Container
       justify="center"
       direction="column"
       gap={1}
-      css={{width: "100px", zIndex: "$3"}}
+      css={{ position: "fixed", width: "100px", zIndex: "$3" }}
     >
-      <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true:undefined}>
+      <Popover placement="left" isDismissable={false}>
         <Popover.Trigger>
           <Grid
             onClick={(e) => {
@@ -28,7 +27,9 @@ export const Nav = ({ handleClickAnswer,showAnswer }: Nav) => {
             </Badge>
           </Grid>
         </Popover.Trigger>
-        <AnswerPop showAnswer={showAnswer}/>
+        <Popover.Content>
+          <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
+        </Popover.Content>
       </Popover>
       <Grid>
         <Icon src={"/icons/hash.svg"} width={40} height={40} alt={"home"} />
@@ -39,13 +40,15 @@ export const Nav = ({ handleClickAnswer,showAnswer }: Nav) => {
       <Grid>
         <Icon src={"/icons/dm.svg"} width={40} height={40} alt={"home"} />
       </Grid>
-      <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true:undefined}>
+      <Popover placement="left" isDismissable={false}>
         <Popover.Trigger>
           <Grid onClick={(e) => handleClickAnswer(e, 2)}>
             <Icon src={"/icons/tweet.svg"} width={40} height={40} alt={"home"} />
           </Grid>
         </Popover.Trigger>
-        <AnswerPop showAnswer={showAnswer}/>
+        <Popover.Content>
+          <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
+        </Popover.Content>
       </Popover>
       <Spacer y={10} />
       <Grid>
