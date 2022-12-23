@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type User = {
   name: string | undefined;
   email: string | undefined;
@@ -13,9 +15,10 @@ export type Account = {
 };
 
 export type Game = {
-  handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, value: number) => void;
-  handleClickMistake: () => void;
+  handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,value: number) => void;
   currentLife: number;
   currentAnswer: number;
   questionNum: number;
+  setShowAnswer:Dispatch<SetStateAction<boolean>>;
+  showAnswer:boolean
 };
