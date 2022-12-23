@@ -1,5 +1,6 @@
 import { Button, Card, Container, Image, Link, Navbar, Row, Text } from "@nextui-org/react";
 import { Game } from "../../../types";
+import { GameNav } from "../../commons/GameNav";
 
 const RainbowBackGround = ({
   currentLife,
@@ -8,7 +9,7 @@ const RainbowBackGround = ({
   questionNum,
   setShowAnswer,
   showAnswer,
-}:Game) => {
+}: Game) => {
   return (
     <Container
       css={{
@@ -23,6 +24,13 @@ const RainbowBackGround = ({
       }}
       fluid
     >
+      <GameNav
+        questionNum={questionNum}
+        currentLife={currentLife}
+        currentAnswer={currentAnswer}
+        setShowAnswer={setShowAnswer}
+        showAnswer={showAnswer}
+      />
       <Card css={{ $$cardColor: "#fff", h: "100%", minHeight: "100vh", minWidth: "100vw" }}>
         <Card.Header>
           <Text h6 size={40} color="brack" css={{ m: 0 }}>

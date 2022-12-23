@@ -1,12 +1,20 @@
-import { Button, Grid } from "@nextui-org/react";
+import { Button, Grid, Popover } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { NeedAnswer } from "../../../types";
+import { AnswerBody } from "../../commons/AnswerBody";
+import { AnswerPop } from "../../commons/AnswerPop";
 
 type Props = {
   onClickRegister?: () => void;
   onClickCancel?: () => void;
-};
+} & NeedAnswer;
 
-export const RegisterButtonGroup = ({ onClickRegister, onClickCancel }: Props): JSX.Element => {
+export const RegisterButtonGroup = ({
+  onClickRegister,
+  onClickCancel,
+  handleClickAnswer,
+  showAnswer,
+}: Props): JSX.Element => {
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseMove = () => {
@@ -36,9 +44,14 @@ export const RegisterButtonGroup = ({ onClickRegister, onClickCancel }: Props): 
         </Button>
       </Grid>
       <Grid>
-        <Button color="primary" onClick={onClickCancel}>
-          キャンセル
-        </Button>
+        <Popover>
+          <Popover.Trigger>
+            <Button color="primary" onClick={onClickCancel}>
+              キャンセル
+            </Button>
+          </Popover.Trigger>
+          <AnswerPop showAnswer={showAnswer} />
+        </Popover>
       </Grid>
     </Grid.Container>
   );
