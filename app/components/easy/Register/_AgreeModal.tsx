@@ -1,8 +1,10 @@
-import { Button, Text } from "@nextui-org/react";
-import React from "react";
+import { Button, Loading, Text } from "@nextui-org/react";
+import React, { useState } from "react";
 import { Modal } from "../../commons/Modal";
+import { RuleBody } from "./_RuleBody";
 
 type Props = {
+  isPurees: boolean;
   isOpen: boolean;
   onClickAgree: () => void;
   onClickCancel: () => void;
@@ -10,6 +12,7 @@ type Props = {
 };
 
 export const AgreeModal = ({
+  isPurees,
   isOpen,
   onClickAgree,
   onClickCancel,
@@ -18,16 +21,16 @@ export const AgreeModal = ({
   return (
     <Modal
       title="同意する"
-      content={<Text>キャンセルします。よろしいですか？</Text>}
+      content={<RuleBody />}
       isOpen={isOpen}
       onClose={onClose}
       buttons={
         <>
-          <Button auto bordered onClick={onClickCancel}>
-            キャンセル
+          <Button bordered onClick={onClickAgree} auto>
+            {isPurees ? <Loading type="spinner" size="lg" /> : "OK"}
           </Button>
-          <Button onClick={onClickAgree} auto>
-            OK
+          <Button auto onClick={onClickCancel}>
+            キャンセル
           </Button>
         </>
       }

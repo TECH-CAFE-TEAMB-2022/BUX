@@ -10,9 +10,10 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
-import React, { FC, VFC } from "react";
+import React, { FC, useState, VFC } from "react";
 import { useDisclosure } from "../../../hooks/useDisclosure";
-import { Game } from "../../../types";
+import { Account, Game } from "../../../types";
+import { initFromValue } from "./constants";
 import { AgreeModal } from "./_AgreeModal";
 import { CancelModal } from "./_CancelModal";
 import { RegisterBody } from "./_RegisterBody";
@@ -25,6 +26,8 @@ export const Register = ({
   handleClickAnswer,
   handleClickMistake,
 }: Game) => {
+  const [formValue, setFromValue] = useState<Account>({ ...initFromValue });
+  const [haasError, setHasError] = useState(false);
   const {
     isOpen: isOpenCancelModal,
     close: closeCancelModal,
@@ -36,6 +39,29 @@ export const Register = ({
     close: closeAgreeModal,
     open: openAgreeModal,
   } = useDisclosure();
+
+  const [isPureesAgree, setIsPureesAgree] = useState(false);
+
+  const isValid = (value: Account): boolean => {
+    console.log(value.name);
+    if (!value.name) false;
+    return true;
+  };
+  const handleClickAgree = () => {
+    setIsPureesAgree(true);
+  };
+  const handleCloseAgreeModal = () => {
+    closeAgreeModal();
+    setIsPureesAgree(false);
+  };
+
+  const handleClickRegister = () => {
+    if (!isValid(formValue)) {
+      setHasError(true);
+      return;
+    }
+    openAgreeModal();
+  };
   return (
     <Container css={{ h: "100vh" }} display="flex" alignItems="center">
       <Grid.Container justify="center">
@@ -48,12 +74,13 @@ export const Register = ({
             </Card.Header>
             <Card.Divider />
             <Card.Body css={{ px: 24 }}>
-              <RegisterBody />
+              {haasError && <Text>どこか間違っています</Text>}
+              <RegisterBody formValue={formValue} />
             </Card.Body>
             <Card.Footer>
               <RegisterButtonGroup
                 onClickCancel={openCancelModal}
-                onClickRegister={openAgreeModal}
+                onClickRegister={handleClickRegister}
               />
             </Card.Footer>
           </Card>
@@ -67,9 +94,10 @@ export const Register = ({
       />
       <AgreeModal
         isOpen={isOpenAgreeModal}
-        onClickCancel={closeAgreeModal}
-        onClickAgree={closeAgreeModal}
+        onClickCancel={handleCloseAgreeModal}
         onClose={closeAgreeModal}
+        onClickAgree={handleClickAgree}
+        isPurees={isPureesAgree}
       />
     </Container>
   );
