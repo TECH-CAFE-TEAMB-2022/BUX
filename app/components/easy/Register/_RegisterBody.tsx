@@ -1,25 +1,58 @@
-import { Input, Radio, Spacer } from "@nextui-org/react";
-import { Account } from "../../../types";
+import { Input, Popover, Radio, Spacer } from "@nextui-org/react";
+import { Account, NeedAnswer } from "../../../types";
+import { AnswerPop } from "../../commons/AnswerPop";
 import { DelayInput } from "./_DelayInput";
 
 type Props = {
   formValue?: Account;
-};
+} & NeedAnswer;
 
-export const RegisterBody = ({ formValue }: Props): JSX.Element => {
+export const RegisterBody = ({ formValue, handleClickAnswer, showAnswer }: Props): JSX.Element => {
+  const handleClickInput = (e: React.MouseEvent<unknown, MouseEvent>) => {
+    handleClickAnswer(e, 2);
+    e.stopPropagation();
+  };
+
+  const handleStop = (e: React.MouseEvent<unknown, MouseEvent>) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       <Spacer y={2.5} />
-      <Input clearable underlined labelPlaceholder="名前" value={formValue?.name} />
+      <Input
+        clearable
+        underlined
+        labelPlaceholder="名前"
+        value={formValue?.name}
+        onClick={(e) => handleStop(e)}
+      />
       <Spacer y={1.5} />
-      <Radio.Group label="性別" defaultValue="1" css={{ fontSize: "$sm" }} orientation="horizontal">
-        <Radio value="1" size="xs">
-          男性
-        </Radio>
-        <Radio value="2" size="xs">
-          女性
-        </Radio>
-      </Radio.Group>
+      <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true : undefined}>
+        <Popover.Trigger>
+          <div
+            onClick={(e) => {
+              handleClickAnswer(e, 1);
+            }}
+          >
+            <Radio.Group
+              label="性別"
+              defaultValue="1"
+              css={{ fontSize: "$sm" }}
+              orientation="horizontal"
+            >
+              <Radio value="1" size="xs">
+                男性
+              </Radio>
+              <Radio value="2" size="xs">
+                女性
+              </Radio>
+            </Radio.Group>
+          </div>
+        </Popover.Trigger>
+        <AnswerPop showAnswer={showAnswer} />
+      </Popover>
+
       <Spacer y={2.5} />
       <Input
         type={"email"}
@@ -27,6 +60,7 @@ export const RegisterBody = ({ formValue }: Props): JSX.Element => {
         underlined
         labelPlaceholder="メールアドレス"
         value={formValue?.email}
+        onClick={(e) => handleStop(e)}
       />
       <Spacer y={2.5} />
       <Input.Password
@@ -34,15 +68,22 @@ export const RegisterBody = ({ formValue }: Props): JSX.Element => {
         underlined
         labelPlaceholder="パスワード"
         value={formValue?.password}
+        onClick={(e) => handleStop(e)}
       />
       <Spacer y={2.5} />
-      <Input.Password
-        hideToggle
-        clearable
-        underlined
-        labelPlaceholder="パスワード（確認）"
-        value={formValue?.passwordForConfirmation}
-      />
+      <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true : undefined}>
+        <Popover.Trigger>
+          <Input.Password
+            hideToggle
+            clearable
+            underlined
+            labelPlaceholder="パスワード（確認）"
+            value={formValue?.passwordForConfirmation}
+            onClick={(e) => handleClickInput(e)}
+          />
+        </Popover.Trigger>
+        <AnswerPop showAnswer={showAnswer} />
+      </Popover>
     </>
   );
 };

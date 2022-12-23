@@ -6,8 +6,9 @@ import Data from '../../data/dummy.json';
 
 type Props = {
   showAnswer: boolean;
+  zIndex?:boolean;
 };
-export const AnswerPop = ({ showAnswer }: Props) => {
+export const AnswerPop = ({ showAnswer,zIndex }: Props) => {
   const [modal, setModal] = useState(false);
   const handlerClickModal = () => setModal(true);
   const {src,title,text} = Data[1]["question1"]
@@ -18,7 +19,7 @@ export const AnswerPop = ({ showAnswer }: Props) => {
 
   return (
     <>
-      <Popover.Content onClick={handlerClickModal} css={{ zIndex: "$1!important" }}>
+      <Popover.Content onClick={handlerClickModal} css={zIndex ? { zIndex: "$max" }:{ zIndex: "$1!important" }}>
         <Icon
           src={showAnswer ? "/icons/question.svg" : "/icons/answerCircle.svg"}
           width={50}

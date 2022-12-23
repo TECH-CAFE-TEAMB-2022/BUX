@@ -3,6 +3,7 @@
     "name": "twitter",
     "questionNum": 5,
     "level": "normal",
+    "displayName":"Twitter",
     "question1": {
       "src": "/answer/nav.png",
       "title": " デザインを統一しよう。具体的すぎる画像もNG。",
@@ -11,12 +12,21 @@
   },
   "2": {
     "name": "accountRegister",
-    "questionNum": 6,
+    "displayName":"新規登録1",
+    "questionNum": 4,
     "level": "easy"
   },
   "3": {
     "name": "gourmetBlog",
-    "questionNum": 3,
+    "displayName":"ブログ",
+    "questionNum": 4,
     "level": "easy"
+  },
+  
+  "4": {
+    "name": "RegistForm",
+    "displayName":"新規登録2",
+    "questionNum": 4,
+    "level": "normal"
   }
 }
