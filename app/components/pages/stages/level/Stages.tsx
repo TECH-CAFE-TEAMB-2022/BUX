@@ -1,18 +1,25 @@
 /**
  * コンポーネント表示の条件分岐
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Overlay } from "../../../commons/Overlay";
 import { useConvertStage } from "../../../../hooks/useConvertStage";
+import { Modal } from "../../../commons/Modal";
+import { useDisclosure } from "../../../../hooks/useDisclosure";
+import { Button, Grid, Row } from "@nextui-org/react";
 
 type Props = {
   id: number;
 };
 
 export const Stages = ({ id }: Props) => {
-  const { Component: Name } = useConvertStage(id);
+  const { Component: Name, questionNum } = useConvertStage(id);
+  const {
+    isOpen: isOpenGameOverModal,
+    close: closeGameOverModal,
+    open: openGameOverModal,
+  } = useDisclosure();
 
-  const questionNum = 5;
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);
   const [questionIDs, setQuestionIDs] = useState<number[]>([]);
@@ -32,9 +39,14 @@ export const Stages = ({ id }: Props) => {
   };
 
   const handleClickMistake = () => {
+    if (currentLife <= 0) return;
     setCurrentLife(currentLife - 1);
   };
 
+  useEffect(() => {
+    if (currentLife > 0) return;
+    openGameOverModal();
+  }, [currentLife]);
   return (
     <>
       <Overlay handleClickMistake={handleClickMistake} />
@@ -44,6 +56,24 @@ export const Stages = ({ id }: Props) => {
         currentAnswer={currentAnswer}
         handleClickAnswer={handleClickAnswer}
         handleClickMistake={handleClickMistake}
+      />
+      <Modal
+        isOpen={isOpenGameOverModal}
+        onClose={closeGameOverModal}
+        title={"GAME OVER"}
+        content={
+          <Grid.Container gap={2} justify="center">
+            <Grid sm={12}>
+              <Button auto bordered>
+                戻る
+              </Button>
+            </Grid>
+            <Grid sm={12}>
+              <Button auto>もう一度</Button>
+            </Grid>
+          </Grid.Container>
+        }
+        preventClose
       />
     </>
   );
