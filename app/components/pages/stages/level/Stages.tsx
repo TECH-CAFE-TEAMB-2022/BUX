@@ -8,17 +8,22 @@ import { useConvertStage } from "../../../../hooks/useConvertStage";
 import { Modal } from "../../../commons/Modal";
 import { useDisclosure } from "../../../../hooks/useDisclosure";
 import { Button, Container, Grid, Row } from "@nextui-org/react";
+import { useRouter } from "next/router";
+import { pagesPath } from "../../../../lib/$path";
+import { LEVEL } from "../../../../constants/leval";
 
 type Props = {
   id: number;
 };
 export const Stages = ({ id }: Props) => {
-  const { Component: Name, questionNum } = useConvertStage(id);
+  const { Component: Name, questionNum, level } = useConvertStage(id);
   const {
     isOpen: isOpenGameOverModal,
     close: closeGameOverModal,
     open: openGameOverModal,
   } = useDisclosure();
+
+  const router = useRouter();
 
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);
@@ -54,6 +59,13 @@ export const Stages = ({ id }: Props) => {
       setCurrentLife(currentLife - 1);
     }
   };
+  const handleClickBack = () => {
+    router.push(pagesPath.stages._level(level).$url());
+  };
+
+  const handleClickReTry = () => {
+    router.reload();
+  };
 
   useEffect(() => {
     if (currentLife > 0) return;
@@ -88,13 +100,16 @@ export const Stages = ({ id }: Props) => {
         title={"GAME OVER"}
         content={
           <Grid.Container gap={2} justify="center">
-            <Grid sm={12}>
-              <Button auto bordered>
+            <Grid sm={6}>
+              <Button auto bordered css={{ width: 100 }} onClick={handleClickBack}>
                 戻る
               </Button>
             </Grid>
-            <Grid sm={12}>
-              <Button auto>もう一度</Button>
+            <Grid sm={6}>
+              <Button auto onClick={handleClickReTry}>
+                {" "}
+                もう一度
+              </Button>
             </Grid>
           </Grid.Container>
         }
