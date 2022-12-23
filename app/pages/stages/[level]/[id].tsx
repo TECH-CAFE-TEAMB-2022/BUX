@@ -7,9 +7,8 @@ import { Stages } from "../../../components/pages/stages/level/Stages";
 const Main: NextPage = () => {
   const router = useRouter();
   const { level, id } = router.query;
-
-  if (!level || !id) return null;
-  return <Stages level={String(level)} id={Number(id)} />;
+  if (!id) return null;
+  return <Stages id={Number(id)} />;
 };
 
 export default Main;
