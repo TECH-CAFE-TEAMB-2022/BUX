@@ -14,10 +14,10 @@ export type Account = {
 };
 
 export type Game = {
-  handleClickAnswer: (e:React.MouseEvent<unknown, MouseEvent>,value: number) => void;
+  handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, value: number) => void;
   currentLife: number;
   currentAnswer: number;
   questionNum: number;
-  setShowAnswer:Dispatch<SetStateAction<boolean>>;
-  showAnswer:boolean
+  setShowAnswer: Dispatch<SetStateAction<boolean>>;
+  showAnswer: boolean;
 };

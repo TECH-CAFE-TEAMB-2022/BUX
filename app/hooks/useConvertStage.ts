@@ -5,7 +5,7 @@ import { Game } from "../types";
 import { Question, Questions } from "../types/question";
 
 type Games = {
-  [key: string]: (value: Game) => JSX.Element;
+  [key: string]: (value: Game) => JSX.Element | null;
 };
 
 const Games: Games = {
