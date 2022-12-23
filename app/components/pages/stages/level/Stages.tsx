@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button, Container, Grid, Popover, Tooltip } from "@nextui-org/react";
 import { Icon } from "../../../commons/Icon";
 import { Register } from "../../../easy/Register";
+import RegistForm from "../../../normal/RegistForm";
 
 
 type Props = {
@@ -15,7 +16,8 @@ type Props = {
 };
 export const Stages = ({ level, id }: Props) => {
   // const Name = Twitter;
-  const Name = Register;
+  // const Name = Register;
+  const Name = RegistForm
   const questionNum = 5;
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);
