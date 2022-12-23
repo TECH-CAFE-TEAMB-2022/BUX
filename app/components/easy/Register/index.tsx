@@ -24,7 +24,6 @@ export const Register = ({
   currentLife,
   currentAnswer,
   handleClickAnswer,
-  handleClickMistake,
 }: Game) => {
   const [formValue, setFromValue] = useState<Account>({ ...initFromValue });
   const [haasError, setHasError] = useState(false);
