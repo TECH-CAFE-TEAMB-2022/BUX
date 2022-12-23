@@ -1,16 +1,18 @@
 /**
  * コンポーネント表示の条件分岐
  */
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Twitter } from "../../../normal/Twitter/index";
 import { Overlay } from "../../../commons/Overlay";
+import { Register } from "../../../easy/Register";
 
 type Props = {
   level: string;
   id: number;
 };
 export const Stages = ({ level, id }: Props) => {
-  const Name = Twitter;
+  // const Name = Twitter;
+  const Name = Register;
   const questionNum = 5;
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);

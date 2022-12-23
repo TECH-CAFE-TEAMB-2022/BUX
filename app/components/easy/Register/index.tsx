@@ -13,6 +13,7 @@ import {
 import React, { FC, VFC } from "react";
 import { useDisclosure } from "../../../hooks/useDisclosure";
 import { Game } from "../../../types";
+import { AgreeModal } from "./_AgreeModal";
 import { CancelModal } from "./_CancelModal";
 import { RegisterBody } from "./_RegisterBody";
 import { RegisterButtonGroup } from "./_RegisterButtonGroup";
@@ -24,7 +25,17 @@ export const Register = ({
   handleClickAnswer,
   handleClickMistake,
 }: Game) => {
-  const { isOpen, close, open } = useDisclosure();
+  const {
+    isOpen: isOpenCancelModal,
+    close: closeCancelModal,
+    open: openCancelModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenAgreeModal,
+    close: closeAgreeModal,
+    open: openAgreeModal,
+  } = useDisclosure();
   return (
     <Container css={{ h: "100vh" }} display="flex" alignItems="center">
       <Grid.Container justify="center">
@@ -36,16 +47,30 @@ export const Register = ({
               </Text>
             </Card.Header>
             <Card.Divider />
-            <Card.Body css={{ px: 12 }}>
+            <Card.Body css={{ px: 24 }}>
               <RegisterBody />
             </Card.Body>
             <Card.Footer>
-              <RegisterButtonGroup onClickCancel={open} />
+              <RegisterButtonGroup
+                onClickCancel={openCancelModal}
+                onClickRegister={openAgreeModal}
+              />
             </Card.Footer>
           </Card>
         </Grid>
       </Grid.Container>
-      <CancelModal isOpen={isOpen} onClickChancel={close} onClickAgree={close} />
+      <CancelModal
+        isOpen={isOpenCancelModal}
+        onClickCancel={closeCancelModal}
+        onClickAgree={closeCancelModal}
+        onClose={closeCancelModal}
+      />
+      <AgreeModal
+        isOpen={isOpenAgreeModal}
+        onClickCancel={closeAgreeModal}
+        onClickAgree={closeAgreeModal}
+        onClose={closeAgreeModal}
+      />
     </Container>
   );
 };

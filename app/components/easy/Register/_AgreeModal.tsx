@@ -9,7 +9,7 @@ type Props = {
   onClose: () => void;
 };
 
-export const CancelModal = ({
+export const AgreeModal = ({
   isOpen,
   onClickAgree,
   onClickCancel,
@@ -17,7 +17,7 @@ export const CancelModal = ({
 }: Props): JSX.Element => {
   return (
     <Modal
-      title="確認"
+      title="同意する"
       content={<Text>キャンセルします。よろしいですか？</Text>}
       isOpen={isOpen}
       onClose={onClose}

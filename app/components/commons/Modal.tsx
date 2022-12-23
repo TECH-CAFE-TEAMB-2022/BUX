@@ -7,9 +7,17 @@ type Props = {
   content?: ReactNode;
   buttons?: ReactNode;
   width?: string;
+  onClose: () => void;
 };
 
-export const Modal = ({ isOpen, title, content, buttons, width = "560px" }: Props): JSX.Element => {
+export const Modal = ({
+  isOpen,
+  title,
+  content,
+  buttons,
+  width = "560px",
+  onClose,
+}: Props): JSX.Element => {
   return (
     <NextModal
       scroll
@@ -17,6 +25,7 @@ export const Modal = ({ isOpen, title, content, buttons, width = "560px" }: Prop
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
       open={isOpen}
+      onClose={onClose}
     >
       <NextModal.Header>
         <Text id="modal-title" size={18} css={{ fontWeight: "bold" }}>
