@@ -6,10 +6,10 @@ import { Game } from "../types";
 import { Question, Questions } from "../types/question";
 
 type Games = {
-  [key: string]: (value: Game) => JSX.Element;
+  [key: string]: (value: Game) => JSX.Element | null;
 };
 
-const games: Games = {
+const Games: Games = {
   twitter: Twitter,
   accountRegister: Register,
   gourmetBlog: RainbowBackGround,
@@ -20,6 +20,7 @@ const questions: Questions = require("../data/dummy.json");
 
 export const useConvertStage = (stageId: number) => {
   const question = questions[stageId];
-  const Component = games[question.name];
-  return { Component, questionNum: question.questionNum };
+  const Component = Games[question?.name];
+
+  return { Component, ...question };
 };
