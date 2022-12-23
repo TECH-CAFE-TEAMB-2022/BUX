@@ -13,6 +13,7 @@ type Props = {
   id: number;
 };
 export const Stages = ({ id }: Props) => {
+
   const { Component: Name, questionNum } = useConvertStage(id);
   const {
     isOpen: isOpenGameOverModal,
