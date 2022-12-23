@@ -19,5 +19,5 @@ const questions: Questions = require("../data/dummy.json");
 export const useConvertStage = (stageId: number) => {
   const question = questions[stageId];
   const Component = games[question.name];
-  return { Component };
+  return { Component, questionNum: question.questionNum };
 };

@@ -1,32 +1,36 @@
 /**
  * コンポーネント表示の条件分岐
  */
-import React, { useState } from "react";
-import { Twitter } from "../../../normal/Twitter/index";
-import Image from "next/image";
-import { Button, Container, Grid, Popover, Tooltip } from "@nextui-org/react";
-import { Icon } from "../../../commons/Icon";
-import { Register } from "../../../easy/Register";
-import RainbowBackGround from "../../../easy/RainbowBackGround";
 
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { useConvertStage } from "../../../../hooks/useConvertStage";
+import { Modal } from "../../../commons/Modal";
+import { useDisclosure } from "../../../../hooks/useDisclosure";
+import { Button, Container, Grid, Row } from "@nextui-org/react";
 
 type Props = {
   id: number;
 };
 export const Stages = ({ id }: Props) => {
-  const Name =  RainbowBackGround ;
-  // const Name = Register;
-  const questionNum = 5;
+
+  const { Component: Name, questionNum } = useConvertStage(id);
+  const {
+    isOpen: isOpenGameOverModal,
+    close: closeGameOverModal,
+    open: openGameOverModal,
+  } = useDisclosure();
+
   const [currentLife, setCurrentLife] = useState(10);
   const [currentAnswer, setCurrentAnswer] = useState(0);
   const [questionIDs, setQuestionIDs] = useState<number[]>([]);
   const [pageX, setPageX] = useState(0);
   const [pageY, setPageY] = useState(0);
   const [mistakeVisible, setMistakeVisible] = useState(false);
-  const [showAnswer,setShowAnswer] = useState(false)
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const handleClickAnswer = (e: React.MouseEvent<unknown, MouseEvent>, questionID: number) => {
-    if(!showAnswer){
+    if (!showAnswer) {
       if (10 > currentLife && !questionIDs.includes(questionID)) {
         setCurrentLife(currentLife + 1);
       }
@@ -37,26 +41,31 @@ export const Stages = ({ id }: Props) => {
         setQuestionIDs((before) => [...before, questionID]);
         setCurrentAnswer(currentAnswer + 1);
       }
-      setMistakeVisible(false)
+      setMistakeVisible(false);
       e.stopPropagation();
     }
   };
 
   const handleClickContiner = (e: React.MouseEvent<unknown, MouseEvent>) => {
-    if(!showAnswer){
+    if (currentLife <= 0) return;
+    if (!showAnswer) {
       setPageX(e.pageX);
-    setPageY(e.pageY);
-    setMistakeVisible(true);
-    setCurrentLife(currentLife - 1);
+      setPageY(e.pageY);
+      setMistakeVisible(true);
+      setCurrentLife(currentLife - 1);
     }
-
   };
 
-  const handleMouseDownMistake=()=>{
-    if(!showAnswer){
-      setMistakeVisible(false)
+  useEffect(() => {
+    if (currentLife > 0) return;
+    openGameOverModal();
+  }, [currentLife]);
+
+  const handleMouseDownMistake = () => {
+    if (!showAnswer) {
+      setMistakeVisible(false);
     }
-  }
+  };
   return (
     <>
       <Container
@@ -74,8 +83,25 @@ export const Stages = ({ id }: Props) => {
           showAnswer={showAnswer}
         />
       </Container>
-
-      {(mistakeVisible===true && showAnswer===false)&& (
+      <Modal
+        isOpen={isOpenGameOverModal}
+        onClose={closeGameOverModal}
+        title={"GAME OVER"}
+        content={
+          <Grid.Container gap={2} justify="center">
+            <Grid sm={12}>
+              <Button auto bordered>
+                戻る
+              </Button>
+            </Grid>
+            <Grid sm={12}>
+              <Button auto>もう一度</Button>
+            </Grid>
+          </Grid.Container>
+        }
+        preventClose
+      />
+      {mistakeVisible === true && showAnswer === false && (
         <Image
           src="/icons/mistake.svg"
           width={100}
