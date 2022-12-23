@@ -11,7 +11,7 @@ import {
   User,
 } from "@nextui-org/react";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { User as Profile } from "../../../BUX/app/types";
+import { User as Profile } from "../../../types/index";
 import { AnswerPop } from "../../commons/AnswerPop";
 import { Icon } from "../../commons/Icon";
 
