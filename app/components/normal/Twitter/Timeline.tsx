@@ -11,10 +11,12 @@ import {
   User,
 } from "@nextui-org/react";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { AnswerPop } from "../../commons/AnswerPop";
 import { Icon } from "../../commons/Icon";
 
 type Timeline = {
   handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
+  showAnswer: boolean;
 };
 type TweetList = Timeline & {
   tweetInfo: { text: string; time: string }[];
@@ -27,7 +29,7 @@ type Tweet = Timeline & {
   text: string | null;
 };
 
-export const Timeline = ({ handleClickAnswer }: Timeline) => {
+export const Timeline = ({ handleClickAnswer, showAnswer }: Timeline) => {
   const [tweetInfo, setTweetInfo] = useState([
     {
       text: "Hello",
@@ -41,26 +43,37 @@ export const Timeline = ({ handleClickAnswer }: Timeline) => {
       text: "Hello",
       time: "10時間",
     },
+    {
+      text: "Hello",
+      time: "10時間",
+    },
   ]);
   return (
     <Grid.Container direction="column">
       <Grid>
-        <Card variant="bordered" css={{ borderRadius: "0px", position: "relative", zIndex: "$10" }}>
+        <Card variant="bordered" css={{ borderRadius: "0px", position: "relative" }}>
           <Card.Body>
-            <TweetForm setTweetInfo={setTweetInfo} handleClickAnswer={handleClickAnswer} />
+            <TweetForm
+              setTweetInfo={setTweetInfo}
+              handleClickAnswer={handleClickAnswer}
+              showAnswer={showAnswer}
+            />
           </Card.Body>
         </Card>
-        <TweetList tweetInfo={tweetInfo} handleClickAnswer={handleClickAnswer} />
+        <TweetList
+          tweetInfo={tweetInfo}
+          handleClickAnswer={handleClickAnswer}
+          showAnswer={showAnswer}
+        />
       </Grid>
     </Grid.Container>
   );
 };
 
-const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
+const TweetForm = ({ setTweetInfo, handleClickAnswer, showAnswer }: TweetForm) => {
   const [error, setError] = useState("");
   const [text, setText] = useState("いまどうしてる？");
   const [answerFlg, setAnswerFlg] = useState(false);
-
   const handleClickTweet = () => {
     if (text) {
       setTweetInfo((before) => [...before, { text: text, time: "今" }]);
@@ -77,7 +90,6 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
     }
     e.stopPropagation();
   };
-
   return (
     <Grid.Container direction="column" gap={2}>
       <Grid>
@@ -89,8 +101,8 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
             <Avatar />
           </Grid>
           <Grid>
-            <Popover placement="top" isDismissable={false}>
-              <Popover.Trigger >
+            <Popover placement="top" isDismissable={false} isOpen={showAnswer ? true : undefined}>
+              <Popover.Trigger>
                 <Textarea
                   value={text}
                   width="700px"
@@ -100,11 +112,7 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
                   onClick={(e) => handleClickTextarea(e, text)}
                 />
               </Popover.Trigger>
-              {answerFlg && (
-                <Popover.Content>
-                  <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
-                </Popover.Content>
-              )}
+              {(answerFlg || showAnswer) && <AnswerPop showAnswer={showAnswer} />}
             </Popover>
           </Grid>
         </Grid.Container>
@@ -117,7 +125,7 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
           </Grid>
           <Spacer />
           <Grid>
-            <Button auto onPress={handleClickTweet}>
+            <Button auto onClick={handleClickTweet}>
               つぶやく
             </Button>
           </Grid>
@@ -127,7 +135,7 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer }: TweetForm) => {
   );
 };
 
-const TweetList = ({ tweetInfo, handleClickAnswer }: TweetList) => {
+const TweetList = ({ tweetInfo, handleClickAnswer, showAnswer }: TweetList) => {
   return (
     <Grid.Container direction="column">
       {tweetInfo.map((value: { text: string; time: string }, index: number) => {
@@ -135,7 +143,12 @@ const TweetList = ({ tweetInfo, handleClickAnswer }: TweetList) => {
           <Grid key={index}>
             <Card variant="bordered" css={{ borderRadius: "0px" }}>
               <Card.Body>
-                <Tweet time={value.time} text={value.text} handleClickAnswer={handleClickAnswer} />
+                <Tweet
+                  time={value.time}
+                  text={value.text}
+                  handleClickAnswer={handleClickAnswer}
+                  showAnswer={showAnswer}
+                />
               </Card.Body>
             </Card>
           </Grid>
@@ -145,11 +158,11 @@ const TweetList = ({ tweetInfo, handleClickAnswer }: TweetList) => {
   );
 };
 
-const Tweet = ({ time, text, handleClickAnswer }: Tweet) => {
+const Tweet = ({ time, text, handleClickAnswer, showAnswer }: Tweet) => {
   return (
     <Grid.Container direction="column">
       <Grid>
-        <Popover placement="right" isDismissable={false}>
+        <Popover placement="right" isDismissable={false} isOpen={showAnswer ? true : undefined}>
           <Popover.Trigger>
             <User
               name={"No name"}
@@ -157,9 +170,7 @@ const Tweet = ({ time, text, handleClickAnswer }: Tweet) => {
               onClick={(e) => handleClickAnswer(e, 3)}
             />
           </Popover.Trigger>
-          <Popover.Content>
-            <Icon src="/icons/answerCircle.svg" width={50} height={50} alt="正解の丸" />
-          </Popover.Content>
+          <AnswerPop showAnswer={showAnswer} />
         </Popover>
       </Grid>
       <Grid css={{ marginLeft: "65px" }}>

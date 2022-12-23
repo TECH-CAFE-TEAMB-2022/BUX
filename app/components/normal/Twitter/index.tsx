@@ -5,38 +5,31 @@ import { Timeline } from "./Timeline";
 import { Search } from "./Search";
 import { GameNav } from "../../commons/GameNav";
 import { Game } from "../../../types";
-
 export const Twitter = ({
   currentLife,
   currentAnswer,
   handleClickAnswer,
   questionNum,
-  handleClickMistake,
+  setShowAnswer,
+  showAnswer
 }: Game) => {
   return (
     <>
-      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} />
-      <Container
-        onClick={(e) => {
-          handleClickMistake();
-          console.log(e.currentTarget);
-        }}
-      >
+      <GameNav questionNum={questionNum} currentLife={currentLife} currentAnswer={currentAnswer} setShowAnswer={setShowAnswer} showAnswer={showAnswer}/>
         <Grid.Container>
           <Spacer x={3} />
           <Grid>
-            <Nav handleClickAnswer={handleClickAnswer} />
+            <Nav handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
           <Spacer x={4} />
           <Grid>
-            <Timeline handleClickAnswer={handleClickAnswer} />
+            <Timeline handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
           <Spacer x={2.8} />
           <Grid>
-            <Search handleClickAnswer={handleClickAnswer} />
+            <Search handleClickAnswer={handleClickAnswer} showAnswer={showAnswer}/>
           </Grid>
         </Grid.Container>
-      </Container>
     </>
   );
 };
