@@ -1,10 +1,11 @@
 import { Input, Radio, Spacer } from "@nextui-org/react";
+import { DelayInput } from "./_DelayInput";
 
 export const RegisterBody = (): JSX.Element => {
   return (
     <>
       <Spacer y={2.5} />
-      <Input clearable underlined labelPlaceholder="名前" />
+      <DelayInput clearable underlined labelPlaceholder="名前" />
       <Spacer y={1.5} />
       <Radio.Group label="性別" defaultValue="1" css={{ fontSize: "$sm" }} orientation="horizontal">
         <Radio value="1" size="xs">

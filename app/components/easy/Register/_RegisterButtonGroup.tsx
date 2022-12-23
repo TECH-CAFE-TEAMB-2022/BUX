@@ -1,4 +1,5 @@
 import { Button, Grid } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 type Props = {
   onClickRegister?: () => void;
@@ -11,10 +12,24 @@ export const RegisterButtonGroup = ({
   onClickBack,
   onClickCancel,
 }: Props): JSX.Element => {
+  const [isHover, setIsHover] = useState(false);
+
+  const handleMouseMove = () => {
+    setIsHover(true);
+  };
+
+  useEffect(() => {
+    if (!isHover) return;
+  }, [isHover]);
+
+  //   const handleMouseOver = () => {
+  //     setIsHover(false);
+  //   };
+
   return (
     <Grid.Container justify="flex-end" gap={1}>
-      <Grid>
-        <Button bordered color="primary" auto onClick={onClickBack}>
+      <Grid css={isHover ? { mt: 48 } : {}}>
+        <Button bordered color="primary" auto onClick={onClickBack} onMouseMove={handleMouseMove}>
           戻る
         </Button>
       </Grid>
