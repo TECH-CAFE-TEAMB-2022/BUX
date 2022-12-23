@@ -13,13 +13,13 @@
   "2": {
     "name": "accountRegister",
     "displayName":"新規登録1",
-    "questionNum": 6,
+    "questionNum": 4,
     "level": "easy"
   },
   "3": {
     "name": "gourmetBlog",
     "displayName":"ブログ",
-    "questionNum": 3,
+    "questionNum": 4,
     "level": "easy"
   },
   

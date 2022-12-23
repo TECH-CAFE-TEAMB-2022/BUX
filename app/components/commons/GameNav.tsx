@@ -47,7 +47,7 @@ export const GameNav = ({
         />
         <Button
           bordered
-          css={{ position: "fixed", bottom: "20px", right: "100px", borderColor: "$accents1" }}
+          css={{ position: "fixed", bottom: "20px", right: "100px", borderColor: "$accents1",zIndex:"$max"}}
           color={"default"}
           auto
           disabled
@@ -58,7 +58,7 @@ export const GameNav = ({
         </Button>
         <Button
           bordered
-          css={{ position: "fixed", bottom: "20px", right: "10px", borderColor: "$accents1" }}
+          css={{ position: "fixed", bottom: "20px", right: "10px", borderColor: "$accents1",zIndex:"$max"}}
           color={"default"}
           auto
           disabled

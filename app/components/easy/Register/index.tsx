@@ -108,6 +108,8 @@ export const Register = ({
         onClickCancel={closeCancelModal}
         onClickAgree={closeCancelModal}
         onClose={closeCancelModal}
+        handleClickAnswer={handleClickAnswer}
+        showAnswer={showAnswer}
       />
       <AgreeModal
         isOpen={isOpenAgreeModal}

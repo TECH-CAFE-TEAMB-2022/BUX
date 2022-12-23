@@ -27,31 +27,25 @@ export const RegisterButtonGroup = ({
 
   return (
     <Grid.Container justify="flex-end" gap={1}>
-      <Grid css={isHover ? { mt: 48 } : {}}>
-        <Button
-          bordered
-          color="primary"
-          auto
-          onMouseMove={handleMouseMove}
-          // onMouseOut={handleMouseOver}
-        >
-          戻る
-        </Button>
-      </Grid>
+      <Popover placement="left" isDismissable={false} isOpen={showAnswer ? true : undefined}>
+          <Grid css={isHover ? { mt: 48 } : {}}>
+        <Popover.Trigger>
+            <Button bordered auto onMouseMove={handleMouseMove} onClick={(e)=>handleClickAnswer(e, 3)} >
+              戻る
+            </Button>
+        </Popover.Trigger>
+          </Grid>
+        <AnswerPop showAnswer={showAnswer} />
+      </Popover>
       <Grid>
         <Button bordered color="primary" auto onClick={onClickRegister}>
           新規登録
         </Button>
       </Grid>
       <Grid>
-        <Popover>
-          <Popover.Trigger>
-            <Button color="primary" onClick={onClickCancel}>
-              キャンセル
-            </Button>
-          </Popover.Trigger>
-          <AnswerPop showAnswer={showAnswer} />
-        </Popover>
+        <Button color="primary" onClick={onClickCancel}>
+          キャンセル
+        </Button>
       </Grid>
     </Grid.Container>
   );
