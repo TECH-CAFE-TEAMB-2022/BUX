@@ -23,6 +23,11 @@
     "displayName": "ブログ",
     "questionNum": 4,
     "level": "easy",
+    "question2": {
+      "src": "/answer/easy_question2.png",
+      "title": " 文字の大きさ=フォントサイズは適切か",
+      "text": "あまりに大きなフォントサイズはデザインに違和感が生じます。また、意図しない改行となるなど問題が生じる場合もあります。PCの場合、本文のフォントサイズは16pxを基本とし、見出しは2倍の32pxが多く推奨されるサイズとなります。スマートフォンの場合は見出しが1.5倍の24pxが推奨されます。"
+    },
     "imagePath": "/imgs/stages/blog.png"
   },
 

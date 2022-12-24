@@ -93,7 +93,7 @@ const RainbowBackGround = ({
                       お店一覧
                     </Text>
                   </Popover.Trigger>
-                  <AnswerPop showAnswer={showAnswer} />
+                  <AnswerPop showAnswer={showAnswer} questionNum={2}/>
                 </Popover>
 
                 <Text h2>麺処からすみ</Text>
