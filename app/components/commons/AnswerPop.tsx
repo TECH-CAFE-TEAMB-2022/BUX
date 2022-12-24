@@ -7,11 +7,12 @@ import Data from '../../data/dummy.json';
 type Props = {
   showAnswer: boolean;
   zIndex?:boolean;
+  questionNum?:number;
 };
-export const AnswerPop = ({ showAnswer,zIndex }: Props) => {
+export const AnswerPop = ({ showAnswer,zIndex ,questionNum}: Props) => {
   const [modal, setModal] = useState(false);
   const handlerClickModal = () => setModal(true);
-  const {src,title,text} = Data[1]["question1"]
+  const {src,title,text} = Data[3]["question2"]
 
   const closeHandler = () => {
     setModal(false);

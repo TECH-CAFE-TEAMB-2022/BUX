@@ -10,11 +10,10 @@ type Props={
 export const AnswerBody = ({src,title,text}:Props) => {
   return (
     <Grid.Container direction="row" gap={2} justify="space-evenly" css={{ overflow: "hidden" }} alignItems={"center"}>
-      <Grid>
+      <Grid css={{maxWidth: "50%"}}>
         <Card css={{ width: "100%", height: "100%" }}>
           <Card.Image
             src={src}
-            objectFit="cover"
             width="100%"
             height="500px"
             alt="Card image background"
