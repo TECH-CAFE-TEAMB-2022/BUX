@@ -16,7 +16,6 @@ export const Twitter = ({
 }: Game) => {
   const { user, isLoading } = useAuth();
 
-  if (!user) return null;
   return (
     <>
       <GameNav
