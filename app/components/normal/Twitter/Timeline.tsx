@@ -18,20 +18,20 @@ import { Icon } from "../../commons/Icon";
 type Timeline = {
   handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
   showAnswer: boolean;
-  user: Profile;
+  user?: Profile;
 };
 type TweetList = Timeline & {
   tweetInfo: { text: string; time: string }[];
-  user: Profile;
+  user?: Profile;
 };
 type TweetForm = Timeline & {
   setTweetInfo: Dispatch<SetStateAction<{ text: string; time: string }[]>>;
-  user: Profile;
+  user?: Profile;
 };
 type Tweet = Timeline & {
   time: string;
   text: string | null;
-  user: Profile;
+  user?: Profile;
 };
 
 export const Timeline = ({ handleClickAnswer, showAnswer, user }: Timeline) => {
@@ -105,7 +105,7 @@ const TweetForm = ({ setTweetInfo, handleClickAnswer, showAnswer, user }: TweetF
       <Grid>
         <Grid.Container gap={1}>
           <Grid>
-            <Avatar src={user.imagePath} />
+            <Avatar src={user?.imagePath} />
           </Grid>
           <Grid>
             <Popover placement="top" isDismissable={false} isOpen={showAnswer ? true : undefined}>
@@ -173,7 +173,7 @@ const Tweet = ({ time, text, handleClickAnswer, showAnswer, user }: Tweet) => {
         <Popover placement="right" isDismissable={false} isOpen={showAnswer ? true : undefined}>
           <Popover.Trigger>
             <User
-              src={user.imagePath}
+              src={user?.imagePath}
               name={user?.name ?? "No name"}
               description={`@UI/UX_designer・${time}`}
               onClick={(e) => handleClickAnswer(e, 3)}

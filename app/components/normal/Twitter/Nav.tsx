@@ -8,7 +8,7 @@ import { Icon } from "../../commons/Icon";
 type Nav = {
   handleClickAnswer: (e: React.MouseEvent<unknown, MouseEvent>, props: number) => void;
   showAnswer: boolean;
-  user: User;
+  user?: User;
 };
 
 export const Nav = ({ handleClickAnswer, showAnswer, user }: Nav) => {
@@ -52,7 +52,7 @@ export const Nav = ({ handleClickAnswer, showAnswer, user }: Nav) => {
       </Popover>
       <Spacer y={10} />
       <Grid>
-        <Avatar src={user.imagePath} />
+        <Avatar src={user?.imagePath} />
       </Grid>
     </Grid.Container>
   );

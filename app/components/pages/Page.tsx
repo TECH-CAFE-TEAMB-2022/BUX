@@ -10,7 +10,7 @@ export const HomePage = (): JSX.Element => {
   const { mutate: login } = useSignInWithGoogle();
   const router = useRouter();
   const handleSuccess = () => {
-    router.push(pagesPath.stages._level(LEVEL.NORMAL).$url());
+    router.push(pagesPath.stages._level("all").$url());
   };
   const handleClickSignIn = () => {
     login({ onSuccess: handleSuccess });
