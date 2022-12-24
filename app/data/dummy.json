@@ -3,30 +3,34 @@
     "name": "twitter",
     "questionNum": 5,
     "level": "normal",
-    "displayName":"Twitter",
+    "displayName": "Twitter",
     "question1": {
       "src": "/answer/nav.png",
       "title": " デザインを統一しよう。具体的すぎる画像もNG。",
       "text": "イラスト、色、アイコンを通してブランドの特徴を伝えることができます。正しくアイコンを使用すると、デザインの魅力を確実に高めることができます。 KISSの原則（Keep it short and simple 短くシンプルにまとめる）は、アイコンを含むUIのすべての要素に対して有効です。 アイコンをできるだけシンプルにし、次の２つのルールに従って不要なものを避けます。 使用する色数を制限しましょう。 きれいなデザインを保つため、３色または４色以下を使用してください。 オブジェクトの基本的な特徴に焦点を当てることで、詳細な描写の量を減らします。 デザインはよくさまざまな画面サイズや解像度で変換されるため、影響を受けないような全体図を維持するようにしてください"
-    }
+    },
+    "imagePath": "/imgs/stages/twitter.png"
   },
   "2": {
     "name": "accountRegister",
-    "displayName":"新規登録1",
+    "displayName": "新規登録1",
     "questionNum": 4,
-    "level": "easy"
+    "level": "easy",
+    "imagePath": "/imgs/stages/accountRegister.png"
   },
   "3": {
     "name": "gourmetBlog",
-    "displayName":"ブログ",
+    "displayName": "ブログ",
     "questionNum": 4,
-    "level": "easy"
+    "level": "easy",
+    "imagePath": "/imgs/stages/blog.png"
   },
-  
+
   "4": {
     "name": "RegistForm",
-    "displayName":"新規登録2",
+    "displayName": "新規登録2",
     "questionNum": 4,
-    "level": "normal"
+    "level": "normal",
+    "imagePath": "/imgs/stages/registerForm.png"
   }
 }

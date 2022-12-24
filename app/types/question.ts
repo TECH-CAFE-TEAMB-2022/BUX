@@ -2,7 +2,8 @@ export type Question = {
   questionNum: number;
   name: string;
   level: "easy" | "normal" | "hard";
-  displayName:string
+  displayName: string;
+  imagePath: string;
 };
 
 export type Questions = {
