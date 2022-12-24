@@ -67,8 +67,8 @@ const SelectLevel = () => {
               {question.value.displayName}
             </Text>
             <Box>
-              {_arr.map((_) => (
-                <AiFillStar color={"#FFDA77"} />
+              {_arr.map((_, i) => (
+                <AiFillStar color={"#FFDA77"} key={i} />
               ))}
             </Box>
           </Row>
