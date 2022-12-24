@@ -18,9 +18,6 @@ export const Header = () => {
     router.push(pagesPath.$url());
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   return (
     <Navbar>
       <Navbar.Brand onClick={handleClickIcon} css={{ cursor: "pointer" }}>
