@@ -1,10 +1,10 @@
-import { Button, Card, Grid, Link, Text } from "@nextui-org/react";
+import { Button, Card, Grid, Link, Row, Text } from "@nextui-org/react";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MoldQuestion, MoldQuestions, Questions } from "../types/question";
 import { Box } from "./commons/Box";
 import { Image } from "@nextui-org/react";
-
+import { AiFillStar } from "react-icons/ai";
 const dummy: Questions = require("../data/dummy.json");
 
 export const mold = (): MoldQuestions => {
@@ -21,6 +21,22 @@ const SelectLevel = () => {
   const dummyData = mold();
 
   const MockItem = ({ question }: { question: MoldQuestion }) => {
+    const level = question.value.level;
+    const convertLevelToNumber = (level: string): number => {
+      switch (level) {
+        case "easy":
+          return 1;
+        case "normal":
+          return 2;
+        case "hard":
+          return 3;
+        default:
+          return 0;
+      }
+    };
+    const number = convertLevelToNumber(level);
+    // NOTE: からの配列を生成
+    const _arr = new Array<string>(number).fill("");
     return (
       <Card
         css={{ textAlign: "center" }}
@@ -39,10 +55,23 @@ const SelectLevel = () => {
             objectFit="cover"
             css={{ border: "1px solid #ddd" }}
           ></Image>
-
-          <Text h6 size={15} css={{ pt: 12, width: "100%", textAlign: "center", marginBottom: 0 }}>
-            {question.value.displayName}
-          </Text>
+          <Row
+            css={{
+              pt: 12,
+              display: "flex",
+              justifyContent: "space-between",
+              alignContent: "center",
+            }}
+          >
+            <Text h6 size={15}>
+              {question.value.displayName}
+            </Text>
+            <Box>
+              {_arr.map((_) => (
+                <AiFillStar color={"#FFDA77"} />
+              ))}
+            </Box>
+          </Row>
         </Card.Body>
       </Card>
     );
